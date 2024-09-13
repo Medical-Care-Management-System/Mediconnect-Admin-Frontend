@@ -31,7 +31,7 @@ const SideBar = () => {
       <div className="p-4 text-xl font-semibold">
         {/* Sidebar title or logo can be added here */}
       </div>
-      <ul className="mt-6">
+      <ul className="mt-6 pt-10">
         {menuItems.map((item, index) => (
           <li
             key={index}
