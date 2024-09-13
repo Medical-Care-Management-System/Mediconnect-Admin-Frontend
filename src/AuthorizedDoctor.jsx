@@ -43,7 +43,7 @@ const AuthorizedDoctor = () => {
             <div className='p-10'>
 
             </div>
-            <div id='Photo' className='pt-0'>
+            <div id='Photo' >
                 <div>
                     Doctor ID Photo
                 </div>
