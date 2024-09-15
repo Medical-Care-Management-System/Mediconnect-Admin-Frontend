@@ -5,8 +5,9 @@ import DoctorContainer from './DoctorContainer';
 import AuthorizedDoctor from './AuthorizedDoctor';
 
 function App() {
+  const [activeMenuItem, setActiveMenuItem] = useState('Authorize Doctors'); // default active
 
-  //sample  data
+  // Sample data
   const [doctorData, setDoctorData] = useState([
     { name: "John Smith", doctor_id: 12345 },
     { name: "Emily Clark", doctor_id: 12344 },
@@ -26,17 +27,21 @@ function App() {
 
   return (
     <div className="flex">
-      <SideBar />
+      <SideBar activeMenuItem={activeMenuItem} setActiveMenuItem={setActiveMenuItem} />
       <div className="flex-1 flex flex-col">
         <Head />
         <main className="flex justify-items-center">
-          <div className='border border-gray-600' style={{ width: '300px', height: '650px' }}>
-            <DoctorContainer doctorData={doctorData} />
-          </div>
-          <div className='px-1'></div>
-          <div className='border border-gray-600 ' style={{ width: '1000px', height: '650px' }}>
-            <AuthorizedDoctor doctorId={firstDoctorId} onDoctorAction={removeFirstDoctor} />
-          </div>
+          {activeMenuItem === 'Authorize Doctors' && (
+            <>
+              <div className='border border-gray-600' style={{ width: '300px', height: '650px' }}>
+                <DoctorContainer doctorData={doctorData} />
+              </div>
+              <div className='px-1'></div>
+              <div className='border border-gray-600 ' style={{ width: '1000px', height: '650px' }}>
+                <AuthorizedDoctor doctorId={firstDoctorId} onDoctorAction={removeFirstDoctor} />
+              </div>
+            </>
+          )}
         </main>
       </div>
     </div>

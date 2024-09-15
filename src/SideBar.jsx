@@ -1,13 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ShieldIcon, StatsIcon, UsersIcon, AuthorizeIcon, ManageIcon, SettingIcon, WarningIcon } from './Icons/icon.js';
 
-const SideBar = () => {
-  const [activeItem, setActiveItem] = useState({ name: 'Authorize Doctors', icon: <AuthorizeIcon /> });
-
-  const handleItemClick = (item) => {
-    setActiveItem(item);
-  };
-
+const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
   const menuItems = [
     { name: 'Authorize Doctors', icon: <AuthorizeIcon /> },
     { name: 'Generate Reports', icon: <ShieldIcon /> },
@@ -30,9 +24,9 @@ const SideBar = () => {
         {menuItems.map((item, index) => (
           <li
             key={index}
-            onClick={() => handleItemClick(item)}
+            onClick={() => setActiveMenuItem(item.name)}
             className={`flex items-center p-2 cursor-pointer hover:bg-gray-700 ${
-              activeItem.name === item.name ? 'bg-transparent border border-blue-500' : ''
+              activeMenuItem === item.name ? 'bg-transparent border border-blue-500' : ''
             }`}
           >
             <div className="mr-4">
@@ -47,9 +41,9 @@ const SideBar = () => {
           {bottomItems.map((item, index) => (
             <li
               key={index}
-              onClick={() => handleItemClick(item)}
+              onClick={() => setActiveMenuItem(item.name)}
               className={`flex items-center p-2 cursor-pointer hover:bg-gray-700 ${
-                activeItem.name === item.name ? 'bg-transparent border border-blue-500' : ''
+                activeMenuItem === item.name ? 'bg-transparent border border-blue-500' : ''
               }`}
             >
               <div className="mr-4">
