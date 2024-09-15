@@ -16,7 +16,7 @@ const AuthorizedDoctor = ({ doctorId, onDoctorAction }) => {
       <div className='text-gray-700 px-4 py-2 text-2xl'>
         Authorized Doctor
       </div>
-      <div className='flex px-4 py-8'>
+      <div className='flex px-4 pt-0'>
         {/* Flex container to make them side by side */}
         <div className='flex w-full justify-between'>
           <div className='w-1/2'>
@@ -44,14 +44,31 @@ const AuthorizedDoctor = ({ doctorId, onDoctorAction }) => {
           <div className='w-1/2'>
             <div>Doctor ID Photo</div>
             <div className='pt-8 pb-4'>Front View</div>
-            <div className='border border-red-400' style={{ width: '300px', height: '200px' }}></div>
+            <div className='border border-red-400' style={{ width: '300px', height: '200px' }}>
+            <div className='border border-red-400' style={{ width: '300px', height: '200px' }}>
+                    <img 
+                    src="https://www.mockofun.com/wp-content/uploads/2022/02/doctor-id-card-62238.jpg" 
+                    alt="description" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                    />
+            </div>
+
+            </div>
             <div className='pt-4'>Back View</div>
-            <div className='border border-red-400' style={{ width: '100px', height: '50px' }}></div>
+            <div className='border border-red-400' style={{ width: '300px', height: '200px' }}>
+
+            <img 
+                    src='https://upload.wikimedia.org/wikipedia/commons/5/58/Estonian_diplomatic_identity_card_starting_2018-12-03_%28Back%29.jpg'
+                    alt="description" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                    />
+
+            </div>
           </div>
         </div>
       </div>
 
-      <div className='flex pl-14 pt-20'>
+      <div className='flex pl-14 py-2'>
         <button className='border bg-red-600 px-32 py-2 text-white' onClick={() => HandleClick(false)}>
           Revoke
         </button>
