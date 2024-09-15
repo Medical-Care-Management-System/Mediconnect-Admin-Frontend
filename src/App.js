@@ -1,29 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from './Head';
 import SideBar from './SideBar';
 import DoctorContainer from './DoctorContainer';
 import AuthorizedDoctor from './AuthorizedDoctor';
 
 function App() {
-  return ( 
-      <div className="flex">
-        <SideBar />
-        <div className="flex-1 flex flex-col">
-          <Head />
-          <main className="flex justify-items-center   ">
-            <div className='border border-gray-600' style={{ width: '300px', height: '650px' }}>
-              <DoctorContainer/>
-            </div>
-            <div className='px-1'>
-            </div>
-            <div className='border border-gray-600 ' style={{ width: '1000px', height: '650px' }}>
-              <AuthorizedDoctor/>
-            </div>
 
-          </main>
-        </div>
+  //sample  data
+  const [doctorData, setDoctorData] = useState([
+    { name: "John Smith", doctor_id: 12345 },
+    { name: "Emily Clark", doctor_id: 12344 },
+    { name: "William Johnson", doctor_id: 12343 },
+  ]);
+
+  // Function to remove the first doctor and update the doctorData state
+  const removeFirstDoctor = () => {
+    if (doctorData.length > 0) {
+      const updatedData = doctorData.slice(1); // Remove the first doctor
+      setDoctorData(updatedData); // Update state
+    }
+  };
+
+  // Get the first doctor's ID
+  const firstDoctorId = doctorData.length > 0 ? doctorData[0].doctor_id : null;
+
+  return (
+    <div className="flex">
+      <SideBar />
+      <div className="flex-1 flex flex-col">
+        <Head />
+        <main className="flex justify-items-center">
+          <div className='border border-gray-600' style={{ width: '300px', height: '650px' }}>
+            <DoctorContainer doctorData={doctorData} />
+          </div>
+          <div className='px-1'></div>
+          <div className='border border-gray-600 ' style={{ width: '1000px', height: '650px' }}>
+            <AuthorizedDoctor doctorId={firstDoctorId} onDoctorAction={removeFirstDoctor} />
+          </div>
+        </main>
       </div>
-
+    </div>
   );
 }
 
