@@ -16,7 +16,7 @@ const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
   ];
 
   return (
-    <div className="h-screen w-64 bg-gray-800 text-white">
+    <div className="h-screen w-64 bg-gray-800 text-white " style={{ width: '220px' }}>
       <div className="p-4 text-xl font-semibold">
         {/* Sidebar title or logo can be added here */}
       </div>
