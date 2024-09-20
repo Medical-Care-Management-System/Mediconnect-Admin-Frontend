@@ -3,6 +3,7 @@ import Head from './Head';
 import SideBar from './SideBar';
 import DoctorContainer from './DoctorContainer';
 import AuthorizedDoctor from './AuthorizedDoctor';
+import Filter from './Filter';
 
 function App() {
   const [activeMenuItem, setActiveMenuItem] = useState('Authorize Doctors'); // default active
@@ -40,6 +41,13 @@ function App() {
               <div className='border border-gray-600 ' style={{ width: '1000px', height: '650px' }}>
                 <AuthorizedDoctor doctorId={firstDoctorId} onDoctorAction={removeFirstDoctor} />
               </div>
+            </>
+          )}
+          {activeMenuItem === 'Generate Reports' && (
+            <>
+            <div className=' px-7'>
+              <Filter/>
+            </div>
             </>
           )}
         </main>
