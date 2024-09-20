@@ -1,5 +1,5 @@
 import React from 'react';
-import {  StatsIcon, AuthorizeIcon, ManageIcon, SettingIcon, WarningIcon } from './Icons/icon.js';
+import {  StatsIcon, AuthorizeIcon, ManageIcon, SettingIcon, WarningIcon, } from './Icons/icon.js';
 
 const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
   const menuItems = [

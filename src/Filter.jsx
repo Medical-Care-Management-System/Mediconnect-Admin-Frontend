@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AddIcon } from './Icons/icon';
 
 const Filter = () => {
   const [isCheckedAge, setIsCheckedAge] = useState(false);
@@ -7,6 +8,11 @@ const Filter = () => {
   const [isCheckedProvince, setIsCheckedProvince] = useState(false);
   const [isCheckedMedicine, setIsCheckedMedicine] = useState(false);
   const [isCheckedGender, setIsCheckedGender] = useState(false);
+  const[StatrAge,setStartAge] =useState();
+  const[EndAge,setEndAge]=useState();
+  const[StepSize,setStepSize]=useState();
+
+  {/* Toggle Button  */}
   const handleToggleAge = () => {
     setIsCheckedAge(!isCheckedAge);
   };
@@ -30,6 +36,25 @@ const Filter = () => {
   const handleToggleGender = () => {
     setIsCheckedGender(!isCheckedGender);
   };
+  {/* Toggele Button End */}
+
+  {/* handle Input */}
+
+  const handleStartAge=(event)=>{
+    setStartAge(event.target.value);
+  }
+
+  const handleEndAge=(event)=>{
+    setEndAge(event.target.value);
+  }
+
+  const handleStep=(event)=>{
+    setStepSize(event.target.value);
+  }
+
+
+  {/* End Handle Input */}
+  
 
   return (
     <div >
@@ -52,13 +77,18 @@ const Filter = () => {
             {/* Line */}
             <div className={`block ${isCheckedAge ? 'bg-black' : 'bg-white'} w-14 h-6 rounded-full border-2 border-black `}></div>
             {/* Dot */}
-            <div className={`dot absolute left-1 top-1 ${isCheckedAge ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedAge ? 'translate-x-6' : 'translate-x-0 '}`}></div>
+            <div className={`dot absolute left-1 top-1 ${isCheckedAge ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedAge ? 'translate-x-8' : 'translate-x-0 '}`}></div>
           </div>
-          {/* Optional Label */}
-          <div className="ml-3 text-gray-700 font-medium">
-            {isCheckedAge ? 'On' : 'Off'}
-          </div>
-        </label>       
+        </label> 
+        <div className='pl-12'>
+        <input type="number"  min="1" max="100" className=' border border-black bg-blue-300 text-black placeholder-black w-32  text-center' value={StatrAge} onChange={handleStartAge} disabled={!isCheckedAge} placeholder='From' required/>      
+        </div>
+        <div className='pl-6'>
+        <input type="number"  min="1" max="100" className=' border border-black bg-blue-300 text-black placeholder-black w-32  text-center' value={EndAge} onChange={handleEndAge} disabled={!isCheckedAge} placeholder='To' required/>      
+        </div>
+        <div className='pl-6'>
+        <input type="number"  min="1" max="100" className=' border border-black bg-blue-300 text-black placeholder-black w-32  text-center' value={StepSize} onChange={handleStep} disabled={!isCheckedAge} placeholder='Step' required/>      
+        </div>
       </div>
       {/* --------------------------------------------------------Age Block  End  ---------------------------------------------------------------------- */}
 
@@ -78,13 +108,13 @@ const Filter = () => {
             {/* Line */}
             <div className={`block ${isCheckedDisease ? 'bg-black' : 'bg-white'} w-14 h-6 rounded-full border-2 border-black `}></div>
             {/* Dot */}
-            <div className={`dot absolute left-1 top-1 ${isCheckedDisease ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedDisease ? 'translate-x-6' : 'translate-x-0 '}`}></div>
+            <div className={`dot absolute left-1 top-1 ${isCheckedDisease ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedDisease ? 'translate-x-8' : 'translate-x-0 '}`}></div>
           </div>
-          {/* Optional Label */}
-          <div className="ml-3 text-gray-700 font-medium">
-            {isCheckedDisease ? 'On' : 'Off'}
-          </div>
-        </label>       
+        </label>
+        {/* <input type="text" required  className=' border border-black bg-blue-300 text-black placeholder-black w-32  text-center' value={} onChange={} disabled={!isCheckedDisease}  /> */}
+        <button   onClick={()=>{}}>
+          <AddIcon/>
+          </button>       
       </div>
       {/* -------------------------------------------------------- Disease Block  End  ---------------------------------------------------------------------- */}
 
@@ -104,7 +134,7 @@ const Filter = () => {
             {/* Line */}
             <div className={`block ${isCheckedDistrict ? 'bg-black' : 'bg-white'} w-14 h-6 rounded-full border-2 border-black `}></div>
             {/* Dot */}
-            <div className={`dot absolute left-1 top-1 ${isCheckedDistrict ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedDistrict ? 'translate-x-6' : 'translate-x-0 '}`}></div>
+            <div className={`dot absolute left-1 top-1 ${isCheckedDistrict ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedDistrict ? 'translate-x-8' : 'translate-x-0 '}`}></div>
           </div>
           {/* Optional Label */}
           <div className="ml-3 text-gray-700 font-medium">
@@ -130,7 +160,7 @@ const Filter = () => {
             {/* Line */}
             <div className={`block ${isCheckedProvince ? 'bg-black' : 'bg-white'} w-14 h-6 rounded-full border-2 border-black `}></div>
             {/* Dot */}
-            <div className={`dot absolute left-1 top-1 ${isCheckedProvince ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedProvince ? 'translate-x-6' : 'translate-x-0 '}`}></div>
+            <div className={`dot absolute left-1 top-1 ${isCheckedProvince ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedProvince ? 'translate-x-8' : 'translate-x-0 '}`}></div>
           </div>
           {/* Optional Label */}
           <div className="ml-3 text-gray-700 font-medium">
@@ -156,7 +186,7 @@ const Filter = () => {
             {/* Line */}
             <div className={`block ${isCheckedMedicine ? 'bg-black' : 'bg-white'} w-14 h-6 rounded-full border-2 border-black `}></div>
             {/* Dot */}
-            <div className={`dot absolute left-1 top-1 ${isCheckedMedicine ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedMedicine ? 'translate-x-6' : 'translate-x-0 '}`}></div>
+            <div className={`dot absolute left-1 top-1 ${isCheckedMedicine ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedMedicine ? 'translate-x-8' : 'translate-x-0 '}`}></div>
           </div>
           {/* Optional Label */}
           <div className="ml-3 text-gray-700 font-medium">
@@ -184,7 +214,7 @@ const Filter = () => {
             {/* Line */}
             <div className={`block ${isCheckedGender ? 'bg-black' : 'bg-white'} w-14 h-6 rounded-full border-2 border-black `}></div>
             {/* Dot */}
-            <div className={`dot absolute left-1 top-1 ${isCheckedGender ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedGender ? 'translate-x-6' : 'translate-x-0 '}`}></div>
+            <div className={`dot absolute left-1 top-1 ${isCheckedGender ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedGender ? 'translate-x-8' : 'translate-x-0 '}`}></div>
           </div>
           {/* Optional Label */}
           <div className="ml-3 text-gray-700 font-medium">
