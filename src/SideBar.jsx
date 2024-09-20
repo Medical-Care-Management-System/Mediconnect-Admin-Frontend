@@ -1,12 +1,10 @@
 import React from 'react';
-import { ShieldIcon, StatsIcon, UsersIcon, AuthorizeIcon, ManageIcon, SettingIcon, WarningIcon } from './Icons/icon.js';
+import {  StatsIcon, AuthorizeIcon, ManageIcon, SettingIcon, WarningIcon } from './Icons/icon.js';
 
 const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
   const menuItems = [
     { name: 'Authorize Doctors', icon: <AuthorizeIcon /> },
-    { name: 'Generate Reports', icon: <ShieldIcon /> },
-    { name: 'User Data', icon: <StatsIcon /> },
-    { name: 'Medical Parameters', icon: <UsersIcon /> },
+    { name: 'Generate Reports', icon: <StatsIcon />  },
     { name: 'Manage Account', icon: <ManageIcon /> },
   ];
 
@@ -36,8 +34,10 @@ const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
           </li>
         ))}
       </ul>
-      <div className="mt-60 pt-10">
+      <div className="mt-60 pt-24">
+        
         <ul className="mt-* pt-20">
+            <hr className='border-blue-500'></hr>
           {bottomItems.map((item, index) => (
             <li
               key={index}
