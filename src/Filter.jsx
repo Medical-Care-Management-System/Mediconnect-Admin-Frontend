@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AddIcon } from './Icons/icon';
+import BarChart from './Barchart';
 
 const Filter = () => {
   const [isCheckedAge, setIsCheckedAge] = useState(false);
@@ -381,12 +382,13 @@ const Filter = () => {
         <button onClick={handleAddGender} disabled={!isCheckedGender}>
           <AddIcon />
         </button>
-        
-
-
       </div>
 
       {/* --------------------------------------------------------Gender Block  End  ---------------------------------------------------------------------- */}
+
+      <div className=" bg-gray-100 flex items-center justify-center">
+      <BarChart />
+    </div>
     </div>
   );
 };
