@@ -12,6 +12,12 @@ const Filter = () => {
   const[EndAge,setEndAge]=useState();
   const[StepSize,setStepSize]=useState();
 
+  const [diseases, setDiseases] = useState([{ id: 1, value: '' }]);
+  const [District,setDistrict]=useState([{id : 1, value : ''}]);
+  const [Province,setProvince]=useState([{id : 1, value : ''}]);
+  const [Medicine,setMedicine]=useState([{id : 1, value : ''}]);
+  const [Gender,setGender]=useState([{id : 1, value : ''}]);
+
   {/* Toggle Button  */}
   const handleToggleAge = () => {
     setIsCheckedAge(!isCheckedAge);
@@ -51,6 +57,59 @@ const Filter = () => {
   const handleStep=(event)=>{
     setStepSize(event.target.value);
   }
+
+  // Handle adding a new disease input box
+  const handleAddDisease = () => {
+    setDiseases([...diseases, { id: diseases.length + 1, value: '' }]);
+  };
+
+  // Handle changes in disease input values
+  const handleDiseaseChange = (id, event) => {
+    const newDiseases = diseases.map(d => d.id === id ? { ...d, value: event.target.value } : d);
+    setDiseases(newDiseases);
+  };
+
+  // Handle adding a new disease input box
+  const handleAddDistrict = () => {
+    setDistrict([...District, { id: District.length + 1, value: '' }]);
+  };
+
+  // Handle changes in disease input values
+  const handleDistrictChange = (id, event) => {
+    const newDistrict = District.map(d => d.id === id ? { ...d, value: event.target.value } : d);
+    setDistrict(newDistrict);
+  };
+
+  const handleAddProvince = () => {
+    setProvince([...Province, { id: Province.length + 1, value: '' }]);
+  };
+
+  // Handle changes in disease input values
+  const handleProvinceChange = (id, event) => {
+    const newProvince = Province.map(d => d.id === id ? { ...d, value: event.target.value } : d);
+    setProvince(newProvince);
+  };
+
+  const handleAddMedicine = () => {
+    setMedicine([...Medicine, { id: Medicine.length + 1, value: '' }]);
+  };
+
+  // Handle changes in disease input values
+  const handleMedicineChange = (id, event) => {
+    const newMedicine = Medicine.map(d => d.id === id ? { ...d, value: event.target.value } : d);
+    setMedicine(newMedicine);
+  };
+
+  const handleAddGender = () => {
+    setGender([...Gender, { id: Gender.length + 1, value: '' }]);
+  };
+
+  // Handle changes in disease input values
+  const handleGenderChange = (id, event) => {
+    const newGender = Gender.map(d => d.id === id ? { ...d, value: event.target.value } : d);
+    setGender(newGender);
+  };
+
 
 
   {/* End Handle Input */}
@@ -111,10 +170,29 @@ const Filter = () => {
             <div className={`dot absolute left-1 top-1 ${isCheckedDisease ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedDisease ? 'translate-x-8' : 'translate-x-0 '}`}></div>
           </div>
         </label>
-        {/* <input type="text" required  className=' border border-black bg-blue-300 text-black placeholder-black w-32  text-center' value={} onChange={} disabled={!isCheckedDisease}  /> */}
-        <button   onClick={()=>{}}>
-          <AddIcon/>
-          </button>       
+
+        <div className="flex flex-wrap " style={{paddingLeft:'46px'}}>
+          {diseases.map((disease) => (
+            
+            <div className='pr-6'>
+                 <input
+              key={disease.id}
+              type="text"
+              className='border border-black  text-black  w-32 h-7 text-center  '
+              value={disease.value}
+              onChange={(e) => handleDiseaseChange(disease.id, e)}
+              disabled={!isCheckedDisease}
+              placeholder={`Disease ${disease.id}`}
+            />
+
+
+            </div>
+           
+          ))}
+        </div>
+        <button onClick={handleAddDisease} disabled={!isCheckedDisease}>
+          <AddIcon />
+        </button>
       </div>
       {/* -------------------------------------------------------- Disease Block  End  ---------------------------------------------------------------------- */}
 
@@ -136,11 +214,31 @@ const Filter = () => {
             {/* Dot */}
             <div className={`dot absolute left-1 top-1 ${isCheckedDistrict ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedDistrict ? 'translate-x-8' : 'translate-x-0 '}`}></div>
           </div>
-          {/* Optional Label */}
-          <div className="ml-3 text-gray-700 font-medium">
-            {isCheckedDistrict ? 'On' : 'Off'}
-          </div>
-        </label>       
+        </label>
+        <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
+          {District.map((District) => (
+            
+            <div className='pr-6'>
+                 <input
+              key={District.id}
+              type="text"
+              className='border border-black bg-blue-300 text-black  w-32 h-7 text-center placeholder-black  '
+              value={District.value}
+              onChange={(e) => handleDistrictChange(District.id, e)}
+              disabled={!isCheckedDistrict}
+              placeholder={`District ${District.id}`}
+            />
+
+
+            </div>
+           
+          ))}
+        </div>
+        <button onClick={handleAddDistrict} disabled={!isCheckedDistrict}>
+          <AddIcon />
+        </button>
+
+
       </div>
       {/* --------------------------------------------------------  District Block  End  ---------------------------------------------------------------------- */}
 
@@ -162,11 +260,32 @@ const Filter = () => {
             {/* Dot */}
             <div className={`dot absolute left-1 top-1 ${isCheckedProvince ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedProvince ? 'translate-x-8' : 'translate-x-0 '}`}></div>
           </div>
-          {/* Optional Label */}
-          <div className="ml-3 text-gray-700 font-medium">
-            {isCheckedProvince ? 'On' : 'Off'}
-          </div>
-        </label>       
+        </label>
+        <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
+          {Province.map((Province) => (
+            
+            <div className='pr-6'>
+                 <input
+              key={Province.id}
+              type="text"
+              className='border border-black  text-black  w-32 h-7 text-center   '
+              value={Province.value}
+              onChange={(e) => handleProvinceChange(Province.id, e)}
+              disabled={!isCheckedProvince}
+              placeholder={`Province ${Province.id}`}
+            />
+
+
+            </div>
+           
+          ))}
+        </div>
+        <button onClick={handleAddProvince} disabled={!isCheckedProvince}>
+          <AddIcon />
+        </button>
+
+
+
       </div>
       {/* --------------------------------------------------------Province  Block  End  ---------------------------------------------------------------------- */}
 
@@ -187,12 +306,34 @@ const Filter = () => {
             <div className={`block ${isCheckedMedicine ? 'bg-black' : 'bg-white'} w-14 h-6 rounded-full border-2 border-black `}></div>
             {/* Dot */}
             <div className={`dot absolute left-1 top-1 ${isCheckedMedicine ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedMedicine ? 'translate-x-8' : 'translate-x-0 '}`}></div>
-          </div>
-          {/* Optional Label */}
-          <div className="ml-3 text-gray-700 font-medium">
-            {isCheckedMedicine ? 'On' : 'Off'}
-          </div>
-        </label>       
+          </div>   
+        </label>
+
+        <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
+          {Medicine.map((Medicine) => (
+            
+            <div className='pr-6'>
+                 <input
+              key={Medicine.id}
+              type="text"
+              className='border border-black  text-black  w-32 h-7 text-center   '
+              value={Medicine.value}
+              onChange={(e) => handleMedicineChange(Medicine.id, e)}
+              disabled={!isCheckedMedicine}
+              placeholder={`Medicine ${Medicine.id}`}
+            />
+
+
+            </div>
+           
+          ))}
+        </div>
+        <button onClick={handleAddMedicine} disabled={!isCheckedMedicine}>
+          <AddIcon />
+        </button>
+        
+
+
       </div>
 
 
@@ -216,11 +357,33 @@ const Filter = () => {
             {/* Dot */}
             <div className={`dot absolute left-1 top-1 ${isCheckedGender ? 'bg-white':'bg-black'} w-4 h-4 rounded-xl transition transform ${isCheckedGender ? 'translate-x-8' : 'translate-x-0 '}`}></div>
           </div>
-          {/* Optional Label */}
-          <div className="ml-3 text-gray-700 font-medium">
-            {isCheckedGender ? 'On' : 'Off'}
-          </div>
-        </label>       
+        </label>  
+
+        <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
+          {Gender.map((Gender) => (
+            
+            <div className='pr-6'>
+                 <input
+              key={Gender.id}
+              type="text"
+              className='border border-black  text-black  w-32 h-7 text-center   '
+              value={Gender.value}
+              onChange={(e) => handleGenderChange(Gender.id, e)}
+              disabled={!isCheckedGender}
+              placeholder={`Gender ${Gender.id}`}
+            />
+
+
+            </div>
+           
+          ))}
+        </div>
+        <button onClick={handleAddGender} disabled={!isCheckedGender}>
+          <AddIcon />
+        </button>
+        
+
+
       </div>
 
       {/* --------------------------------------------------------Gender Block  End  ---------------------------------------------------------------------- */}
