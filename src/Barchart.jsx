@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
+import { DownloadIcon } from './Icons/icon';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,42 +10,177 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import * as XLSX from 'xlsx';
+import { color } from 'chart.js/helpers';
 
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const BarChart = () => {
+  const chartRef = useRef(null); // Create a reference to the chart
+  const [showDownloadOptions, setShowDownloadOptions] = useState(false); // Control modal visibility
+
+  // Dummy data for the chart
   const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
       {
-        label: 'Dataset 1',
+        label: '',
         data: [65, 59, 80, 81, 56, 55, 40],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: [
+          '#71797E'
+        ],
+
+        
         borderWidth: 1,
+        borderColor: 'rgba(0, 0, 0, 0.1)',
+        barThickness:30,
       },
     ],
   };
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'top',
+        display: false,
       },
-    //   title: {
-    //     display: true,
-    //     text: 'Bar Chart Example',
-    //   },
     },
+    scales: {
+      x: {
+        ticks:{
+          color:'black',
+        },
+        
+        title: {
+          display: true,
+          text: 'Months',
+          font: {
+            size: 16,
+            weight: 'bold',
+          },
+          color: '#000000', 
+        },
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        ticks:{
+          display: true,
+          color:'black',
+        },
+        title: {
+          display: true,
+          text: 'Values',
+          font: {
+            size: 16,
+            weight: 'bold',
+          },
+          color: '#000000',
+        },
+        grid: {
+          display: false, // Disable grid lines inside the chart
+        drawTicks: true, // Enable tick marks
+        tickLength: 10, // Length of the tick marks (you can adjust this)
+        tickColor: 'black', // Color of the tick marks
+        },
+        beginAtZero: true,
+      },
+    },
+  };
+  
+
+  // Download chart as PDF
+  const downloadPDF = () => {
+    const chart = chartRef.current;
+
+    html2canvas(chart, { useCORS: true }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('landscape');
+      pdf.addImage(imgData, 'PNG', 10, 10, 280, 150); // Adjust the dimensions as needed
+      pdf.save('chart.pdf');
+    });
+  };
+
+  // Download chart data as Excel file
+  const downloadExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(
+      data.labels.map((label, index) => ({
+        Month: label,
+        Value: data.datasets[0].data[index],
+      }))
+    );
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'BarChart Data');
+    XLSX.writeFile(workbook, 'chart-data.xlsx');
+  };
+
+  // Handle download click
+  const handleDownloadClick = () => {
+    setShowDownloadOptions(true); // Show the options when the download icon is clicked
+  };
+
+  // Close modal
+  const closeDownloadOptions = () => {
+    setShowDownloadOptions(false);
   };
 
   return (
-    <div className="container mx-auto ">
-      <div className="bg-white shadow-lg rounded-lg ">
+    <div className=""> {/* Remove outer margins and paddings */}
+      {/* Conditional rendering of the download options (popup/modal) */}
+      {showDownloadOptions && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded shadow-lg">
+            <h2 className="text-xl font-semibold mb-4">Choose download format:</h2>
+            <div className="flex space-x-4">
+              <button
+                onClick={() => {
+                  downloadPDF();
+                  closeDownloadOptions();
+                }}
+                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+              >
+                Download PDF
+              </button>
+              <button
+                onClick={() => {
+                  downloadExcel();
+                  closeDownloadOptions();
+                }}
+                className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+              >
+                Download Excel
+              </button>
+            </div>
+            <button
+              onClick={closeDownloadOptions}
+              className="mt-4 text-gray-500 hover:underline"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+      <div className='flex'>
+      <div
+        className="bg-white  p-0"
+        style={{ width: '600px', height: '300px', margin: '0' }} // Removed extra space and centered
+        ref={chartRef}
+      >
         <Bar data={data} options={options} />
       </div>
+      <div className="flex justify-end ">
+        <button onClick={handleDownloadClick} className="">
+          <DownloadIcon />
+        </button>
+      </div>
+
+      </div>
+      
     </div>
   );
 };

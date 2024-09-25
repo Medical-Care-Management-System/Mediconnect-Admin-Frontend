@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { AddIcon } from './Icons/icon';
 import BarChart from './Barchart';
+// import SimpleMap from './SimpleMap'
+import MapWithDensity from './MapWithDensity';
+
+
 
 const Filter = () => {
   const [isCheckedAge, setIsCheckedAge] = useState(false);
@@ -114,6 +118,48 @@ const Filter = () => {
 
 
   {/* End Handle Input */}
+
+  // X-Axis intialization
+  const [xAxis, setXAxis] = useState('');
+  const [yAxis, setYAxis] = useState('');
+
+  // Function to handle X-Axis selection
+  const handleXAxisChange = (event) => {
+    setXAxis(event.target.value);
+    // Reset Y-axis selection if it matches the new X-axis
+    if (event.target.value === yAxis) {
+      setYAxis('');
+    }
+  };
+
+  // Function to handle Y-Axis selection
+  const handleYAxisChange = (event) => {
+    setYAxis(event.target.value);
+  };
+
+  // Function to get options based on toggle buttons
+  const getAxisOptions = () => {
+    const options = [];
+    if (isCheckedAge) options.push('Age');
+    if (isCheckedDisease) options.push('Disease');
+    if (isCheckedDistrict) options.push('District');
+    if (isCheckedProvince) options.push('Province');
+    if (isCheckedMedicine) options.push('Medicine');
+    if (isCheckedGender) options.push('Gender');
+    return options;
+  };
+
+  // Function to get Y-Axis options based on X-Axis selection
+  const getYAxisOptions = () => {
+    return getAxisOptions().filter(option => option !== xAxis);
+  };
+
+  /////////////////////////// generate barchart darta table button func /////////////////
+  const handleGenerateReport = () => {
+    // Implement report generation logic
+    console.log(`Generating report for X-Axis: ${xAxis}, Y-Axis: ${yAxis}`);
+  };
+  //////////////////////////////////
   
 
   return (
@@ -217,11 +263,9 @@ const Filter = () => {
           </div>
         </label>
         <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
-          {District.map((District) => (
-            
-            <div className='pr-6'>
-                 <input
-              key={District.id}
+        {District.map((District) => (
+          <div className='pr-6' key={District.id}> {/* Move key here */}
+            <input
               type="text"
               className='border border-black bg-blue-300 text-black  w-32 h-7 text-center placeholder-black  '
               value={District.value}
@@ -229,11 +273,9 @@ const Filter = () => {
               disabled={!isCheckedDistrict}
               placeholder={`District ${District.id}`}
             />
+          </div>
+))}
 
-
-            </div>
-           
-          ))}
         </div>
         <button onClick={handleAddDistrict} disabled={!isCheckedDistrict}>
           <AddIcon />
@@ -263,23 +305,19 @@ const Filter = () => {
           </div>
         </label>
         <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
-          {Province.map((Province) => (
-            
-            <div className='pr-6'>
-                 <input
-              key={Province.id}
-              type="text"
-              className='border border-black  text-black  w-32 h-7 text-center   '
-              value={Province.value}
-              onChange={(e) => handleProvinceChange(Province.id, e)}
-              disabled={!isCheckedProvince}
-              placeholder={`Province ${Province.id}`}
-            />
+        {Province.map((Province) => (
+  <div className='pr-6' key={Province.id}> {/* Move key here */}
+    <input
+      type="text"
+      className='border border-black  text-black  w-32 h-7 text-center   '
+      value={Province.value}
+      onChange={(e) => handleProvinceChange(Province.id, e)}
+      disabled={!isCheckedProvince}
+      placeholder={`Province ${Province.id}`}
+    />
+  </div>
+))}
 
-
-            </div>
-           
-          ))}
         </div>
         <button onClick={handleAddProvince} disabled={!isCheckedProvince}>
           <AddIcon />
@@ -311,23 +349,19 @@ const Filter = () => {
         </label>
 
         <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
-          {Medicine.map((Medicine) => (
-            
-            <div className='pr-6'>
-                 <input
-              key={Medicine.id}
-              type="text"
-              className='border border-black  text-black  w-32 h-7 text-center   '
-              value={Medicine.value}
-              onChange={(e) => handleMedicineChange(Medicine.id, e)}
-              disabled={!isCheckedMedicine}
-              placeholder={`Medicine ${Medicine.id}`}
-            />
+        {Medicine.map((Medicine) => (
+  <div className='pr-6' key={Medicine.id}> {/* Move key here */}
+    <input
+      type="text"
+      className='border border-black  text-black  w-32 h-7 text-center   '
+      value={Medicine.value}
+      onChange={(e) => handleMedicineChange(Medicine.id, e)}
+      disabled={!isCheckedMedicine}
+      placeholder={`Medicine ${Medicine.id}`}
+    />
+  </div>
+))}
 
-
-            </div>
-           
-          ))}
         </div>
         <button onClick={handleAddMedicine} disabled={!isCheckedMedicine}>
           <AddIcon />
@@ -361,23 +395,19 @@ const Filter = () => {
         </label>  
 
         <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
-          {Gender.map((Gender) => (
-            
-            <div className='pr-6'>
-                 <input
-              key={Gender.id}
-              type="text"
-              className='border border-black  text-black  w-32 h-7 text-center   '
-              value={Gender.value}
-              onChange={(e) => handleGenderChange(Gender.id, e)}
-              disabled={!isCheckedGender}
-              placeholder={`Gender ${Gender.id}`}
-            />
+        {Gender.map((Gender) => (
+  <div className='pr-6' key={Gender.id}> {/* Move key here */}
+    <input
+      type="text"
+      className='border border-black  text-black  w-32 h-7 text-center   '
+      value={Gender.value}
+      onChange={(e) => handleGenderChange(Gender.id, e)}
+      disabled={!isCheckedGender}
+      placeholder={`Gender ${Gender.id}`}
+    />
+  </div>
+))}
 
-
-            </div>
-           
-          ))}
         </div>
         <button onClick={handleAddGender} disabled={!isCheckedGender}>
           <AddIcon />
@@ -385,11 +415,70 @@ const Filter = () => {
       </div>
 
       {/* --------------------------------------------------------Gender Block  End  ---------------------------------------------------------------------- */}
+      
+      <div className='flex'>
+        {/* Drop down box X-axis */}
 
-      <div className=" bg-gray-100 flex items-center justify-center">
+
+      <div className='flex pt-5 pl-20 pr-20' >
+        <div className="font-bold text-sm"></div>
+        <select
+          className=' border-2 w-24 h-8 border-black text-black rounded-lg'
+          value={xAxis}
+          onChange={handleXAxisChange}
+        >
+          <option value="" disabled className='text-sm'>X-axis</option>
+          {getAxisOptions().map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>  
+          {/* Y-Axis Dropdown */}
+      <div className='flex pt-5 pl-20' >
+        <div className="font-bold text-sm"></div>
+        <select
+          className=' border-2 w-24 h-8 border-black text-black rounded-lg'
+          value={yAxis}
+          onChange={handleYAxisChange}
+          disabled={!xAxis} // Disable if no X-axis is selected
+        >
+          <option value="" disabled>Y-axis</option>
+          {getYAxisOptions().map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </div>
+          
+      <div className='flex pt-5 pl-16'>
+        <button
+          onClick={handleGenerateReport}
+          className='bg-blue-400 text-black font-semibold text-sm py-2 px-4 rounded-3xl '
+        >
+          Generate Graph
+        </button>
+      </div>
+      </div>
+      
+
+      
+
+
+      {/* End x-axis dropdown */}
+
+
+      <div className="">
       <BarChart />
     </div>
+   
+      {/* <SimpleMap/> */}
+      <MapWithDensity/>
+      {/* <SLM/> */}
     </div>
+    
   );
 };
 

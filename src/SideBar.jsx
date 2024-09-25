@@ -23,8 +23,8 @@ const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
           <li
             key={index}
             onClick={() => setActiveMenuItem(item.name)}
-            className={`flex items-center p-2 cursor-pointer hover:bg-gray-700 ${
-              activeMenuItem === item.name ? 'bg-transparent border border-blue-500' : ''
+            className={`flex items-center p-2 cursor-pointer  ${
+              activeMenuItem === item.name ? 'bg-transparent border bg-gray-700' : ''
             }`}
           >
             <div className="mr-4">
