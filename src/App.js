@@ -4,9 +4,10 @@ import SideBar from './SideBar';
 import DoctorContainer from './DoctorContainer';
 import AuthorizedDoctor from './AuthorizedDoctor';
 import Filter from './Filter';
+import HomePage from './HomePage';
 
 function App() {
-  const [activeMenuItem, setActiveMenuItem] = useState('Authorize Doctors'); // default active
+  const [activeMenuItem, setActiveMenuItem] = useState('Home'); // default active
 
   // Sample data
   const [doctorData, setDoctorData] = useState([
@@ -32,6 +33,13 @@ function App() {
       <div className="flex-1 flex flex-col">
         <Head />
         <main className="flex justify-items-center">
+        {activeMenuItem === 'Home' && (
+            <>
+            <div className=' px-7'>
+              <HomePage/>
+            </div>
+            </>
+          )}
           {activeMenuItem === 'Authorize Doctors' && (
             <>
               <div className='border border-gray-600' style={{ width: '300px', height: '650px' }}>

@@ -16,6 +16,7 @@
     "chart.js": "^4.4.4",
     "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",
+    "json": "^11.0.0",
     "jspdf": "^2.5.2",
     "leaflet": "^1.9.4",
     "react": "^18.3.1",
@@ -23,7 +24,9 @@
     "react-dom": "^18.3.1",
     "react-leaflet": "^4.2.1",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "server": "^1.0.41",
+    "web-vitals": "^2.1.4",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts start",

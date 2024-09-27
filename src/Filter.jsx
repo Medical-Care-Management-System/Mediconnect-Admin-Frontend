@@ -473,10 +473,7 @@ const Filter = () => {
       <div className="">
       <BarChart />
     </div>
-   
-      {/* <SimpleMap/> */}
-      <MapWithDensity/>
-      {/* <SLM/> */}
+
     </div>
     
   );

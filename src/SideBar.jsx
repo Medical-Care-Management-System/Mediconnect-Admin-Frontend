@@ -1,8 +1,9 @@
 import React from 'react';
-import {  StatsIcon, AuthorizeIcon, ManageIcon, SettingIcon, WarningIcon, } from './Icons/icon.js';
+import {  StatsIcon, AuthorizeIcon, ManageIcon, SettingIcon, WarningIcon,HomeIcon } from './Icons/icon.js';
 
 const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
   const menuItems = [
+    { name: 'Home', icon: <HomeIcon /> },
     { name: 'Authorize Doctors', icon: <AuthorizeIcon /> },
     { name: 'Generate Reports', icon: <StatsIcon />  },
     { name: 'Manage Account', icon: <ManageIcon /> },
@@ -18,13 +19,13 @@ const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
       <div className="p-4 text-xl font-semibold">
         {/* Sidebar title or logo can be added here */}
       </div>
-      <ul className="mt-6 pt-10">
+      <ul className="mt-6 pt-5">
         {menuItems.map((item, index) => (
           <li
             key={index}
             onClick={() => setActiveMenuItem(item.name)}
             className={`flex items-center p-2 cursor-pointer  ${
-              activeMenuItem === item.name ? 'bg-transparent border bg-gray-700' : ''
+              activeMenuItem === item.name ? ' bg-gray-500' : ''
             }`}
           >
             <div className="mr-4">
@@ -42,8 +43,8 @@ const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
             <li
               key={index}
               onClick={() => setActiveMenuItem(item.name)}
-              className={`flex items-center p-2 cursor-pointer hover:bg-gray-700 ${
-                activeMenuItem === item.name ? 'bg-transparent border border-blue-500' : ''
+              className={`flex items-center p-2 cursor-pointer  ${
+                activeMenuItem === item.name ? 'bg-gray-500' : ''
               }`}
             >
               <div className="mr-4">
