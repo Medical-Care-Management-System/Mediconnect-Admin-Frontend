@@ -1,7 +1,7 @@
 import React from 'react';
-import {  StatsIcon, AuthorizeIcon, ManageIcon, SettingIcon, WarningIcon,HomeIcon } from './Icons/icon.js';
+import { StatsIcon, AuthorizeIcon, ManageIcon, HomeIcon } from './Icons/icon.js';
 
-const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
+const SideBar = ({ activeMenuItem, setActiveMenuItem, adminName }) => {
   const menuItems = [
     { name: 'Home', icon: <HomeIcon /> },
     { name: 'Authorize Doctors', icon: <AuthorizeIcon /> },
@@ -9,24 +9,23 @@ const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
     { name: 'Manage Account', icon: <ManageIcon /> },
   ];
 
-  const bottomItems = [
-    { name: 'Suspecious Users', icon: <SettingIcon /> },
-    { name: 'Warning', icon: <WarningIcon /> },
-  ];
+  // Extract the first letter of the admin name
+  const firstLetter = adminName ? adminName.charAt(0).toUpperCase() : '';
 
   return (
-    <div className="h-screen w-64 bg-gray-800 text-white " style={{ width: '220px' }}>
-      <div className="p-4 text-xl font-semibold">
-        {/* Sidebar title or logo can be added here */}
+    <div className="h-full-screen w-64 bg-gray-800 text-white" style={{ width: '220px' }}>
+      <div className=" items-center pt-4 pl-4">
+        <div className="flex items-center justify-center w-20 h-20 bg-gray-600 rounded-full text-3xl font-semibold mr-2">
+          {firstLetter}
+        </div>
+        <span className="text-xl font-semibold">{adminName}</span>
       </div>
-      <ul className="mt-6 pt-5">
+      <ul className="mt-6 pt-10">
         {menuItems.map((item, index) => (
           <li
             key={index}
             onClick={() => setActiveMenuItem(item.name)}
-            className={`flex items-center p-2 cursor-pointer  ${
-              activeMenuItem === item.name ? ' bg-gray-500' : ''
-            }`}
+            className={`flex items-center py-5 cursor-pointer ${activeMenuItem === item.name ? ' bg-gray-500' : ''}`}
           >
             <div className="mr-4">
               {item.icon}
@@ -35,26 +34,6 @@ const SideBar = ({ activeMenuItem, setActiveMenuItem }) => {
           </li>
         ))}
       </ul>
-      <div className="mt-60 pt-24">
-        
-        <ul className="mt-* pt-20">
-            <hr className='border-blue-500'></hr>
-          {bottomItems.map((item, index) => (
-            <li
-              key={index}
-              onClick={() => setActiveMenuItem(item.name)}
-              className={`flex items-center p-2 cursor-pointer  ${
-                activeMenuItem === item.name ? 'bg-gray-500' : ''
-              }`}
-            >
-              <div className="mr-4">
-                {item.icon}
-              </div>
-              {item.name}
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };
