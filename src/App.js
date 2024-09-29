@@ -5,6 +5,7 @@ import DoctorContainer from './DoctorContainer';
 import AuthorizedDoctor from './AuthorizedDoctor';
 import Filter from './Filter';
 import HomePage from './HomePage';
+import ManageAccount from './ManageAccount';
 
 function App() {
   const [activeMenuItem, setActiveMenuItem] = useState('Home'); // default active
@@ -58,6 +59,11 @@ function App() {
             </div>
             </>
           )}
+
+           {activeMenuItem === 'Manage Account' && ( 
+              <ManageAccount />
+          )}
+
         </main>
       </div>
     </div>

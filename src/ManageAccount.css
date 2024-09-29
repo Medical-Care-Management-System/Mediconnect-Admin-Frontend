@@ -1,0 +1,54 @@
+.manage-accounts {
+    padding: 20px;
+    width: 100%;
+    
+  }
+  
+  .manage-accounts div {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    justify-content:space-around;
+    
+
+  
+  }
+  
+  input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid black; 
+    border-radius: 4px; 
+  }
+  
+  button {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .deactivate-btn {
+    background-color: rgb(251, 103, 103);
+    color: white;
+    border: none;
+  }
+  
+  .save-btn {
+    background-color: rgb(81, 138, 245);
+    color: white;
+    border: none;
+  }
+  
+  .alert-btn {
+    background-color: rgb(251, 103, 103);
+    color: white;
+    border: none;
+  }
+  
+  .alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
