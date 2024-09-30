@@ -30,12 +30,12 @@ const AuthorizedDoctor = ({ doctorId, onDoctorAction }) => {
               <div className='flex py-2'>
                 <div>Name</div>
                 <div className='px-10'></div>
-                <div className='border border-gray-600' style={{ width: '300px', height: '30px' }}></div>
+                <div className='border rounded-md border-gray-600' style={{ width: '300px', height: '30px' }}> get from council</div>
               </div>
               <div className='flex py-2'>
                 <div>Registered Date</div>
                 <div style={{ width: '10px' }}></div>
-                <div className='border border-gray-600' style={{ width: '300px', height: '30px' }}></div>
+                <div className='border border-gray-600 rounded-md' style={{ width: '300px', height: '30px' }}>get from council</div>
               </div>
             </div>
           </div>

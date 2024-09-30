@@ -11,7 +11,7 @@ const DoctorContainer = ({ doctorData }) => {
               key={index}
               className="flex flex-col p-2 cursor-default"
             >
-              <div className={`border border-black flex flex-col items-center justify-center ${index === 0 ? 'bg-blue-400' : ''}`}>
+              <div className={`border border-black flex rounded-md flex-col items-center justify-center ${index === 0 ? 'bg-blue-400' : ''}`}>
                 <div className='text-lg'>Dr. {item.name}</div>
                 <div className={`text-sm ${index === 0 ? 'text-white' : 'text-blue-400'}`}>Doctor ID: {item.doctor_id}</div>
               </div>

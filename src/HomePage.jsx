@@ -33,8 +33,7 @@ const HomePage = () => {
   const [hospitalSearchTerm, setHospitalSearchTerm] = useState('');
   const [doctors, setDoctors] = useState(initialDoctors);
   const [hospitals] = useState(initialHospitals);
-  const [selectedDoctor, setSelectedDoctor] = useState(null); // New state for selected doctor
-  const [isEditing, setIsEditing] = useState(false); // New state for edit mode
+
 
   // Filter doctors based on search term
   const filteredDoctors = doctors.filter((doctor) =>
@@ -54,25 +53,11 @@ const HomePage = () => {
     );
   }
 
-  const handleEditClick = (doctor) => {
-    setSelectedDoctor(doctor);
-    setIsEditing(true);
-  }
 
-  const handleSave = () => {
-    // Logic to save the updated doctor data
-    setDoctors((prevDoctors) =>
-      prevDoctors.map((doctor) =>
-        doctor.id === selectedDoctor.id ? selectedDoctor : doctor
-      )
-    );
-    setIsEditing(false);
-    setSelectedDoctor(null);
-  }
 
-  const handleInputChange = (e) => {
-    setSelectedDoctor({ ...selectedDoctor, [e.target.name]: e.target.value });
-  }
+
+
+ 
 
   return (
     <div>
@@ -99,44 +84,7 @@ const HomePage = () => {
       </div>
 
       {/* Editing Form */}
-      {isEditing && selectedDoctor && (
-        <div className='mb-4 p-4 border border-gray-300'>
-          <h3 className='font-bold mb-2'>Edit Doctor</h3>
-          <input
-            type='text'
-            name='name'
-            placeholder='Doctor Name'
-            value={selectedDoctor.name}
-            onChange={handleInputChange}
-            className='border p-2 mb-2 w-full'
-          />
-          <input
-            type='text'
-            name='specialized'
-            placeholder='Specialization'
-            value={selectedDoctor.specialized}
-            onChange={handleInputChange}
-            className='border p-2 mb-2 w-full'
-          />
-          <input
-            type='number'
-            name='rating'
-            placeholder='Rating'
-            value={selectedDoctor.rating}
-            onChange={handleInputChange}
-            className='border p-2 mb-2 w-full'
-            step="0.1"
-            min="0"
-            max="5"
-          />
-          <button onClick={handleSave} className='bg-blue-500 text-white px-4 py-1 rounded'>
-            Save
-          </button>
-          <button onClick={() => setIsEditing(false)} className='bg-red-500 text-white px-4 py-1 rounded ml-2'>
-            Cancel
-          </button>
-        </div>
-      )}
+     
 
       {/* Manage Doctors Section */}
       <div className='space-y-8'>
@@ -163,7 +111,7 @@ const HomePage = () => {
                   <th className='border px-4 py-2 w-1/2'>Name</th>
                   <th className='border px-4 py-2 w-1/4'>Specialized</th>
                   <th className='border px-4 py-2 w-1/4'>Rating</th>
-                  <th className='border px-4 py-2 w-1/4'>Action</th>
+                 
                 </tr>
               </thead>
               <tbody>
@@ -180,14 +128,7 @@ const HomePage = () => {
                       <td className='border px-4 py-2'>{doctor.name}</td>
                       <td className='border px-4 py-2'>{doctor.specialized}</td>
                       <td className='border px-4 py-2'>{rating(doctor.rating)}</td>
-                      <td className='border px-4 py-2'>
-                        <button
-                          onClick={() => handleEditClick(doctor)}
-                          className='bg-green-500 hover:bg-green-700 text-white px-4 py-1 rounded'
-                        >
-                          Edit
-                        </button>
-                      </td>
+                      
                     </tr>
                   ))
                 )}
