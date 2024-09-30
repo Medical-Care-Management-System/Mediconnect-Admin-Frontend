@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { AddIcon } from './Icons/icon';
 import BarChart from './Barchart';
-// import SimpleMap from './SimpleMap'
-import MapWithDensity from './MapWithDensity';
+
 
 
 
@@ -122,6 +121,7 @@ const Filter = () => {
   // X-Axis intialization
   const [xAxis, setXAxis] = useState('');
   const [yAxis, setYAxis] = useState('');
+  const[Reportstatus,setReportstatus]=useState(false);
 
   // Function to handle X-Axis selection
   const handleXAxisChange = (event) => {
@@ -158,6 +158,7 @@ const Filter = () => {
   const handleGenerateReport = () => {
     // Implement report generation logic
     console.log(`Generating report for X-Axis: ${xAxis}, Y-Axis: ${yAxis}`);
+    setReportstatus(true);
   };
   //////////////////////////////////
   
@@ -471,7 +472,13 @@ const Filter = () => {
 
 
       <div className="">
-      <BarChart />
+        {Reportstatus && yAxis!=='' &&(
+          <>
+             <BarChart xAxis={xAxis} yAxis={yAxis} />
+
+          </>
+        )}
+     
     </div>
 
     </div>

@@ -18,7 +18,7 @@ import { color } from 'chart.js/helpers';
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarChart = () => {
+const BarChart = ({xAxis,yAxis}) => {
   const chartRef = useRef(null); // Create a reference to the chart
   const [showDownloadOptions, setShowDownloadOptions] = useState(false); // Control modal visibility
 
@@ -57,7 +57,7 @@ const BarChart = () => {
         
         title: {
           display: true,
-          text: 'Months',
+          text: xAxis,
           font: {
             size: 16,
             weight: 'bold',
@@ -75,7 +75,7 @@ const BarChart = () => {
         },
         title: {
           display: true,
-          text: 'Values',
+          text: yAxis,
           font: {
             size: 16,
             weight: 'bold',
