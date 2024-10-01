@@ -7,6 +7,16 @@ import Filter from './Filter';
 import HomePage from './HomePage';
 import ManageAccount from './ManageAccount';
 
+// Clerk imports
+import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react';
+
+// Import your publishable key
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Clerk Publishable Key");
+}
+
 function App() {
   const [activeMenuItem, setActiveMenuItem] = useState('Home'); // default active
 
@@ -29,38 +39,45 @@ function App() {
   const firstDoctorId = doctorData.length > 0 ? doctorData[0].doctor_id : null;
 
   return (
-    <div className="flex min-h-screen"> {/* Ensure the main container takes the full viewport height */}
-      <SideBar activeMenuItem={activeMenuItem} setActiveMenuItem={setActiveMenuItem}  adminName={'Jason Robert'}/>
-      <div className="flex-1 flex flex-col">
-        <Head />
-        <main className="flex-1 overflow-y-auto"> {/* Enable vertical scrolling */}
-          {activeMenuItem === 'Home' && (
-            <div className='px-7'>
-              <HomePage/>
-            </div>
-          )}
-          {activeMenuItem === 'Authorize Doctors' && (
-            <div className="flex px-7">
-              <div className='border border-gray-600' style={{ width: '300px' }}>
-                <DoctorContainer doctorData={doctorData} />
-              </div>
-              <div className='px-1'></div>
-              <div className='border border-gray-600 flex-1'>
-                <AuthorizedDoctor doctorId={firstDoctorId} onDoctorAction={removeFirstDoctor} />
-              </div>
-            </div>
-          )}
-          {activeMenuItem === 'Generate Reports' && (
-            <div className='px-7'>
-              <Filter/>
-            </div>
-          )}
-          {activeMenuItem === 'Manage Account' && ( 
-            <ManageAccount />
-          )}
-        </main>
-      </div>
-    </div>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+      <SignedIn>
+        <div className="flex min-h-screen"> {/* Ensure the main container takes the full viewport height */}
+          <SideBar activeMenuItem={activeMenuItem} setActiveMenuItem={setActiveMenuItem} adminName={'Jason Robert'} />
+          <div className="flex-1 flex flex-col">
+            <Head />
+            <main className="flex-1 overflow-y-auto"> {/* Enable vertical scrolling */}
+              {activeMenuItem === 'Home' && (
+                <div className='px-7'>
+                  <HomePage />
+                </div>
+              )}
+              {activeMenuItem === 'Authorize Doctors' && (
+                <div className="flex px-7">
+                  <div className='border border-gray-600' style={{ width: '300px' }}>
+                    <DoctorContainer doctorData={doctorData} />
+                  </div>
+                  <div className='px-1'></div>
+                  <div className='border border-gray-600 flex-1'>
+                    <AuthorizedDoctor doctorId={firstDoctorId} onDoctorAction={removeFirstDoctor} />
+                  </div>
+                </div>
+              )}
+              {activeMenuItem === 'Generate Reports' && (
+                <div className='px-7'>
+                  <Filter />
+                </div>
+              )}
+              {activeMenuItem === 'Manage Account' && (
+                <ManageAccount />
+              )}
+            </main>
+          </div>
+        </div>
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </ClerkProvider>
   );
 }
 

@@ -1,21 +1,26 @@
 import React from 'react';
-
-const handleLogout = () => {
-  console.log("User logged out");
-  // Add your logout logic here
-};
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
 const Head = () => {
-    
+  const handleLogout = () => {
+    console.log("User logged out");
+    // You can add your additional logout logic here if needed.
+  };
+
   return (
     <div className="flex justify-between items-center border border-white p-4">
       <header className="text-3xl">MediConnect Admin Portal</header>
-      <button 
-        className="bg-blue-500 h-10 w-20 text-white" 
-        onClick={handleLogout}  // Ensure this is a function reference
-      >
-        Logout
-      </button>
+      
+      {/* Handle signed in and signed out states */}
+      <div>
+        <SignedOut>
+          <SignInButton mode="modal" /> {/* Show SignInButton if the user is signed out */}
+        </SignedOut>
+        
+        <SignedIn>
+          <UserButton afterSignOutUrl="/" onSignOut={handleLogout} /> {/* Show UserButton if the user is signed in */}
+        </SignedIn>
+      </div>
     </div>
   );
 };
