@@ -18,13 +18,13 @@ import { color } from 'chart.js/helpers';
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarChart = ({xAxis,yAxis}) => {
+const BarChart = ({xAxis,yAxis,xPara}) => {
   const chartRef = useRef(null); // Create a reference to the chart
   const [showDownloadOptions, setShowDownloadOptions] = useState(false); // Control modal visibility
 
   // Dummy data for the chart
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: xPara,
     datasets: [
       {
         label: '',
@@ -51,10 +51,9 @@ const BarChart = ({xAxis,yAxis}) => {
     },
     scales: {
       x: {
-        ticks:{
-          color:'black',
+        ticks: {
+          color: 'black',
         },
-        
         title: {
           display: true,
           text: xAxis,
@@ -62,16 +61,23 @@ const BarChart = ({xAxis,yAxis}) => {
             size: 16,
             weight: 'bold',
           },
-          color: '#000000', 
+          color: '#3b3b3b',
         },
         grid: {
-          display: false,
+          drawOnChartArea: false, // Grid outside the chart area for X-axis
+          drawTicks: true,        // Enable tick marks
+          color: '	#636363',         // Grid line color
+          tickWidth:3,
+        },
+        border: {
+          color: '#3b3b3b', // Axis line color
+          width: 2.5,         // Increase X-axis thickness (adjust as needed)
         },
       },
       y: {
-        ticks:{
+        ticks: {
           display: true,
-          color:'black',
+          color: 'black',
         },
         title: {
           display: true,
@@ -83,15 +89,22 @@ const BarChart = ({xAxis,yAxis}) => {
           color: '#000000',
         },
         grid: {
-          display: false, // Disable grid lines inside the chart
-        drawTicks: true, // Enable tick marks
-        tickLength: 10, // Length of the tick marks (you can adjust this)
-        tickColor: 'black', // Color of the tick marks
+          drawOnChartArea: false, // Grid outside the chart area for Y-axis
+          drawTicks: true,        // Enable tick marks
+          tickLength: 10,         // Length of the tick marks
+          tickColor: '	#636363',     // Color of the tick marks
+          color: '	#636363',
+          tickWidth:3,         // Grid line color
         },
         beginAtZero: true,
+        border: {
+          color: '#000000', // Axis line color
+          width: 2.5,         // Increase y-axis thickness (adjust as needed)
+        },
       },
     },
   };
+  
   
 
   // Download chart as PDF

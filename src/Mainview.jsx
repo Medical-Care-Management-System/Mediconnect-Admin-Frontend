@@ -7,7 +7,7 @@ import Filter from './Filter';
 import HomePage from './HomePage';
 import ManageAccount from './ManageAccount';
 
-function Main() {
+function Mainview() {
   const [activeMenuItem, setActiveMenuItem] = useState('Home'); // default active
 
   // Sample data
@@ -64,4 +64,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Mainview;

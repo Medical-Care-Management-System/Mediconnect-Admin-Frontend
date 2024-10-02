@@ -15,37 +15,32 @@ const Filter = () => {
   const[StatrAge,setStartAge] =useState();
   const[EndAge,setEndAge]=useState();
   const[StepSize,setStepSize]=useState();
-
+  const [activeToggles, setActiveToggles] = useState(0); // Track the active toggles
   const [diseases, setDiseases] = useState([{ id: 1, value: '' }]);
   const [District,setDistrict]=useState([{id : 1, value : ''}]);
   const [Province,setProvince]=useState([{id : 1, value : ''}]);
   const [Medicine,setMedicine]=useState([{id : 1, value : ''}]);
   const [Gender,setGender]=useState([{id : 1, value : ''}]);
 
+  const handleToggle = (isChecked, setIsChecked) => {
+    if (isChecked) {
+      setIsChecked(false);
+      setActiveToggles(activeToggles - 1);
+    } else if (activeToggles < 2) {
+      setIsChecked(true);
+      setActiveToggles(activeToggles + 1);
+    }
+  };
+
+
   {/* Toggle Button  */}
-  const handleToggleAge = () => {
-    setIsCheckedAge(!isCheckedAge);
-  };
+  const handleToggleAge = () => handleToggle(isCheckedAge, setIsCheckedAge);
+  const handleToggleDisease = () => handleToggle(isCheckedDisease, setIsCheckedDisease);
+  const handleToggleDistrict = () => handleToggle(isCheckedDistrict, setIsCheckedDistrict);
+  const handleToggleProvince = () => handleToggle(isCheckedProvince, setIsCheckedProvince);
+  const handleToggleMedicine = () => handleToggle(isCheckedMedicine, setIsCheckedMedicine);
+  const handleToggleGender = () => handleToggle(isCheckedGender, setIsCheckedGender);
 
-  const handleToggleDisease = () => {
-    setIsCheckedDisease(!isCheckedDisease);
-  };
-
-  const handleToggleDistrict = () => {
-    setIsCheckedDistrict(!isCheckedDistrict);
-  };
-
-  const handleToggleProvince = () => {
-    setIsCheckedProvince(!isCheckedProvince);
-  };
-
-  const handleToggleMedicine = () => {
-    setIsCheckedMedicine(!isCheckedMedicine);
-  };
-
-  const handleToggleGender = () => {
-    setIsCheckedGender(!isCheckedGender);
-  };
   {/* Toggele Button End */}
 
   {/* handle Input */}
@@ -137,28 +132,149 @@ const Filter = () => {
     setYAxis(event.target.value);
   };
 
-  // Function to get options based on toggle buttons
-  const getAxisOptions = () => {
-    const options = [];
-    if (isCheckedAge) options.push('Age');
-    if (isCheckedDisease) options.push('Disease');
-    if (isCheckedDistrict) options.push('District');
-    if (isCheckedProvince) options.push('Province');
-    if (isCheckedMedicine) options.push('Medicine');
-    if (isCheckedGender) options.push('Gender');
+  let hashmap={};
+  console.log(hashmap);
+  const getXAxisOptions=()=>{
+    const options=[];
+    let temp=[];
+
+    if(isCheckedAge) {
+      
+      options.push("Age Class");
+      hashmap['Age Class']=[StatrAge,EndAge,StepSize];
+      // console.log("temp");
+      // console.log(temp);
+    };
+    if(isCheckedDisease) {options.push("Disease");
+      
+      diseases.forEach(disease => {
+               if (disease.value) {
+                 temp.push(disease.value);
+               }
+            });
+      hashmap["Disease"]=temp;
+      console.log("temp");
+      console.log(hashmap["Disease"]);
+      console.log(temp);
+      temp=[];
+
+    };
+    if(isCheckedDistrict) {options.push("District");
+      District.forEach(District => {
+        if (District.value) {
+          temp.push(District.value);
+        }
+     });
+        hashmap["District"]=temp;
+        console.log("temp");
+        console.log(hashmap["District"]);
+        console.log(temp);
+        temp=[];
+
+    };
+    if(isCheckedProvince) {options.push("Province");
+      Province.forEach(Province => {
+        if (Province.value) {
+          temp.push(Province.value);
+        }
+     });
+        hashmap["Province"]=temp;
+        console.log("temp");
+        console.log(temp);
+        console.log(hashmap["Province"]);
+        temp=[];
+    
+
+    };
+    if(isCheckedMedicine) {options.push("Medicine");
+
+      Medicine.forEach(Medicine => {
+        if (Medicine.value) {
+          console.log(Medicine.value)
+          temp.push(Medicine.value);
+        }
+     });
+        hashmap["Medicine"]=temp;
+        console.log("temp");
+        console.log(temp);
+        console.log(hashmap["Medicine"]);
+        temp=[];
+    };
+    if(isCheckedGender) {options.push("Gender");
+      Gender.forEach(Gender => {
+        if (Gender.value) {
+          temp.push(Gender.value);
+        }
+     });
+        hashmap["Gender"]=temp;
+        console.log("temp");
+        console.log(temp);
+        console.log(hashmap["Gender"]);
+        temp=[];
+
+    };
     return options;
-  };
+
+
+
+
+
+  }
+  // Function to get options based on toggle buttons
+  // const getAxisOptions = () => {
+  //   const options = [];
+  //   if (isCheckedAge) options.push('Age');
+  //   if (isCheckedDisease) {
+  //     diseases.forEach(disease => {
+  //       if (disease.value) {
+  //         options.push(disease.value);
+  //       }
+  //     });
+  //   }
+  //   if (isCheckedDistrict) {
+  //     District.forEach(district => {
+  //       if (district.value) {
+  //         options.push(district.value);
+  //       }
+  //     });
+  //   }
+  //   if (isCheckedProvince) {
+  //     Province.forEach(province => {
+  //       if (province.value) {
+  //         options.push(province.value);
+  //       }
+  //     });
+  //   }
+  //   if (isCheckedMedicine) {
+  //     Medicine.forEach(medicine => {
+  //       if (medicine.value) {
+  //         options.push(medicine.value);
+  //       }
+  //     });
+  //   }
+  //   if (isCheckedGender) {
+  //     Gender.forEach(gender => {
+  //       if (gender.value) {
+  //         options.push(gender.value);
+  //       }
+  //     });
+  //   }
+  //   return options;
+  // };
 
   // Function to get Y-Axis options based on X-Axis selection
   const getYAxisOptions = () => {
-    return getAxisOptions().filter(option => option !== xAxis);
+    return getXAxisOptions().filter(option => option !== xAxis);
   };
 
   /////////////////////////// generate barchart darta table button func /////////////////
   const handleGenerateReport = () => {
-    // Implement report generation logic
-    console.log(`Generating report for X-Axis: ${xAxis}, Y-Axis: ${yAxis}`);
-    setReportstatus(true);
+    if (xAxis && yAxis) {
+      console.log(`Generating report for X-Axis: ${xAxis}, Y-Axis: ${yAxis}`);
+      setReportstatus(true);
+    } else {
+      alert("Please select valid X and Y axes.");
+    }
   };
   //////////////////////////////////
   
@@ -188,20 +304,20 @@ const Filter = () => {
           </div>
         </label> 
         <div className='pl-12'>
-        <input type="number"  min="1" max="100" className=' border border-black bg-blue-300 text-black placeholder-black w-32  text-center' value={StatrAge} onChange={handleStartAge} disabled={!isCheckedAge} placeholder='From' required/>      
+        <input type="number"  min="1" max="100" className=' border border-black text-black placeholder-black w-32 rounded-md text-center' value={StatrAge} onChange={handleStartAge} disabled={!isCheckedAge} placeholder='From' required/>      
         </div>
         <div className='pl-6'>
-        <input type="number"  min="1" max="100" className=' border border-black bg-blue-300 text-black placeholder-black w-32  text-center' value={EndAge} onChange={handleEndAge} disabled={!isCheckedAge} placeholder='To' required/>      
+        <input type="number"  min="1" max="100" className=' border border-black text-black placeholder-black w-32 rounded-md text-center' value={EndAge} onChange={handleEndAge} disabled={!isCheckedAge} placeholder='To' required/>      
         </div>
         <div className='pl-6'>
-        <input type="number"  min="1" max="100" className=' border border-black bg-blue-300 text-black placeholder-black w-32  text-center' value={StepSize} onChange={handleStep} disabled={!isCheckedAge} placeholder='Step' required/>      
+        <input type="number"  min="1" max="100" className=' border border-black  text-black placeholder-black w-32 rounded-md text-center' value={StepSize} onChange={handleStep} disabled={!isCheckedAge} placeholder='Step' required/>      
         </div>
       </div>
       {/* --------------------------------------------------------Age Block  End  ---------------------------------------------------------------------- */}
 
       {/* --------------------------------------------------------  Disease Block  ---------------------------------------------------------------------- */}
       <div  className='flex pt-3'    style={{ fontFamily: "'Open Sans', sans-serif" }}>
-        <div className="font-bold text-sm">Disease</div>
+        <div className="font-bold pt-3 text-sm">Disease</div>
       
          {/* Toggle Button */}
          <label className="flex items-center cursor-pointer " style={{paddingLeft:'165px'}}>
@@ -222,7 +338,7 @@ const Filter = () => {
         <div className="flex flex-wrap " style={{paddingLeft:'46px'}}>
           {diseases.map((disease) => (
             
-            <div className='pr-6'>
+            <div className='pr-6 pt-3'>
                  <input
               key={disease.id}
               type="text"
@@ -246,7 +362,7 @@ const Filter = () => {
 
       {/* --------------------------------------------------------   District Block  ---------------------------------------------------------------------- */}
       <div  className='flex pt-3'    style={{ fontFamily: "'Open Sans', sans-serif" }}>
-        <div className="font-bold text-sm">District</div>
+        <div className="font-bold pt-3 text-sm">District</div>
       
          {/* Toggle Button */}
          <label className="flex items-center cursor-pointer " style={{paddingLeft:'165px'}}>
@@ -265,10 +381,10 @@ const Filter = () => {
         </label>
         <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
         {District.map((District) => (
-          <div className='pr-6' key={District.id}> {/* Move key here */}
+          <div className='pr-6 pt-2' key={District.id}> {/* Move key here */}
             <input
               type="text"
-              className='border border-black bg-blue-300 text-black  w-32 h-7 text-center placeholder-black  '
+              className='border border-black text-black  w-32 h-7 text-center placeholder-black  '
               value={District.value}
               onChange={(e) => handleDistrictChange(District.id, e)}
               disabled={!isCheckedDistrict}
@@ -288,7 +404,7 @@ const Filter = () => {
 
       {/* --------------------------------------------------------Province Block   ---------------------------------------------------------------------- */}
       <div  className='flex pt-3'    style={{ fontFamily: "'Open Sans', sans-serif" }}>
-        <div className="font-bold text-sm">Province</div>
+        <div className="font-bold pt-3 text-sm">Province</div>
       
          {/* Toggle Button */}
          <label className="flex items-center cursor-pointer "style={{paddingLeft:'155px'}}>
@@ -307,7 +423,7 @@ const Filter = () => {
         </label>
         <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
         {Province.map((Province) => (
-  <div className='pr-6' key={Province.id}> {/* Move key here */}
+  <div className='pr-6 pt-2' key={Province.id}> {/* Move key here */}
     <input
       type="text"
       className='border border-black  text-black  w-32 h-7 text-center   '
@@ -331,7 +447,7 @@ const Filter = () => {
 
       {/* --------------------------------------------------------Medicine Block  ---------------------------------------------------------------------- */}
       <div  className='flex pt-3'    style={{ fontFamily: "'Open Sans', sans-serif" }}>
-        <div className="font-bold text-sm">Medicine</div>
+        <div className="font-bold pt-3 text-sm">Medicine</div>
       
          {/* Toggle Button */}
          <label className="flex items-center cursor-pointer "style={{paddingLeft:'153px'}}>
@@ -351,7 +467,7 @@ const Filter = () => {
 
         <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
         {Medicine.map((Medicine) => (
-  <div className='pr-6' key={Medicine.id}> {/* Move key here */}
+  <div className='pr-6 pt-2' key={Medicine.id}> {/* Move key here */}
     <input
       type="text"
       className='border border-black  text-black  w-32 h-7 text-center   '
@@ -377,7 +493,7 @@ const Filter = () => {
 
       {/* --------------------------------------------------------Gender Block---------------------------------------------------------------------- */}
       <div  className='flex pt-3'    style={{ fontFamily: "'Open Sans', sans-serif" }}>
-        <div className="font-bold text-sm">Gender</div>
+        <div className="font-bold pt-3 text-sm">Gender</div>
       
          {/* Toggle Button */}
          <label className="flex items-center cursor-pointer "style={{paddingLeft:'165px'}}>
@@ -397,7 +513,7 @@ const Filter = () => {
 
         <div className="flex flex-wrap " style={{paddingLeft:'48px'}}>
         {Gender.map((Gender) => (
-  <div className='pr-6' key={Gender.id}> {/* Move key here */}
+  <div className='pr-6 pt-2' key={Gender.id}> {/* Move key here */}
     <input
       type="text"
       className='border border-black  text-black  w-32 h-7 text-center   '
@@ -429,7 +545,7 @@ const Filter = () => {
           onChange={handleXAxisChange}
         >
           <option value="" disabled className='text-sm'>X-axis</option>
-          {getAxisOptions().map((option, index) => (
+          {getXAxisOptions().map((option, index) => (
             <option key={index} value={option}>
               {option}
             </option>
@@ -445,12 +561,29 @@ const Filter = () => {
           onChange={handleYAxisChange}
           disabled={!xAxis} // Disable if no X-axis is selected
         >
-          <option value="" disabled>Y-axis</option>
+          {/* <option value="" disabled>Y-axis</option>
           {getYAxisOptions().map((option, index) => (
             <option key={index} value={option}>
-              {option}
+              {hashmap[option]}
+
             </option>
-          ))}
+          ))} */}
+
+            <option value="" disabled>Y-axis</option>
+            {getYAxisOptions().map((option, index) => (
+              hashmap[option] && Array.isArray(hashmap[option]) ? (
+                hashmap[option].map((item, subIndex) => (
+                  <option key={`${index}-${subIndex}`} value={item}>
+                    {item}
+                  </option>
+                ))
+              ) : (
+                <option key={index} value={option}>
+                  {hashmap[option]}
+                </option>
+              )
+            ))}
+
         </select>
       </div>
           
@@ -474,7 +607,7 @@ const Filter = () => {
       <div className="">
         {Reportstatus && yAxis!=='' &&(
           <>
-             <BarChart xAxis={xAxis} yAxis={yAxis} />
+             <BarChart xAxis={xAxis} yAxis={yAxis}  xPara={hashmap[xAxis]}/>
 
           </>
         )}
