@@ -1,12 +1,15 @@
 import React from 'react';
-
-const handleLogout = () => {
-  console.log("User logged out");
-  // Add your logout logic here
-};
+import { useNavigate } from 'react-router-dom';
 
 const Head = () => {
-    
+  const navigate = useNavigate();
+  
+      const handleLogout = () => {
+        navigate('/login');
+        console.log("User logged out");
+        // Add your logout logic here
+      };
+
   return (
     <div className="flex justify-between items-center border border-white p-4">
       <header className="text-3xl">MediConnect Admin Portal</header>

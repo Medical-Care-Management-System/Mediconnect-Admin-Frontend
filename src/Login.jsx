@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { TextField, Button, Container, Box } from '@mui/material';
+import { TextField, Button, Container, Box, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
@@ -7,26 +7,33 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); // State for error message
   
-  const emailRef = useRef(null);  
-  const passwordRef = useRef(null);  
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleLogin = () => {
+    setError(''); // Reset error message
+
     if (!email) {
-      emailRef.current.focus();  
+      emailRef.current.focus();
       return;
     }
     if (!password) {
-      passwordRef.current.focus(); 
+      passwordRef.current.focus();
       return;
     }
 
     console.log('Email:', email, 'Password:', password);
 
-    // Here, you would typically validate the email and password
-    // If login is successful, navigate to the main page
-    navigate('/main'); // Navigate to Main component
+    // Check for valid email and password
+    if (email === "example@gmail.com" && password === "12345678") {
+      navigate('/main');
+    } else {
+      // Set error message if email or password is incorrect
+      setError('Email or Password is incorrect');
+    }
   };
 
   return (
@@ -44,12 +51,12 @@ const Login = () => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        width='80%'
-        height='70vh'
+        width="80%"
+        height="70vh"
         sx={{
-          border: '1px solid #ccc', 
-          padding: '20px',          
-          borderRadius: '8px',       
+          border: '1px solid #ccc',
+          padding: '20px',
+          borderRadius: '8px',
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
         }}
       >
@@ -59,13 +66,13 @@ const Login = () => {
           <Avatar
             alt="logo"
             src="/logo.jpg"
-            sx={{ width: 200, height: 200, border: '1px solid #ccc' }}
+            sx={{ width: 100, height: 100, border: '1px solid #ccc' }}
           />
         </Stack>
 
         <TextField
-          inputRef={emailRef}  
-          type='Email'
+          inputRef={emailRef}
+          type='email'
           label="Email"
           variant="outlined"
           fullWidth
@@ -74,7 +81,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
-          inputRef={passwordRef}  
+          inputRef={passwordRef}
           label="Password"
           type="password"
           variant="outlined"
@@ -88,10 +95,20 @@ const Login = () => {
           color="primary"
           onClick={handleLogin}
           fullWidth
-          style={{ marginTop: '20px' }}
+          style={{ marginTop: '10px' }}
         >
           Login
         </Button>
+        {error && (
+          <Typography
+            variant="body2"
+            color="error"
+            align="center"
+            sx={{ marginTop: '10px' }}
+          >
+            {error}
+          </Typography>
+        )}
       </Box>
     </Container>
   );

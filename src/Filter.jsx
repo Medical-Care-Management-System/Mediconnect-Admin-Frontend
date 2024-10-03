@@ -33,7 +33,7 @@ const Filter = () => {
   };
 
 
-  {/* Toggle Button  */}
+
   const handleToggleAge = () => handleToggle(isCheckedAge, setIsCheckedAge);
   const handleToggleDisease = () => handleToggle(isCheckedDisease, setIsCheckedDisease);
   const handleToggleDistrict = () => handleToggle(isCheckedDistrict, setIsCheckedDistrict);
@@ -41,9 +41,7 @@ const Filter = () => {
   const handleToggleMedicine = () => handleToggle(isCheckedMedicine, setIsCheckedMedicine);
   const handleToggleGender = () => handleToggle(isCheckedGender, setIsCheckedGender);
 
-  {/* Toggele Button End */}
 
-  {/* handle Input */}
 
   const handleStartAge=(event)=>{
     setStartAge(event.target.value);
@@ -111,7 +109,7 @@ const Filter = () => {
 
 
 
-  {/* End Handle Input */}
+
 
   // X-Axis intialization
   const [xAxis, setXAxis] = useState('');

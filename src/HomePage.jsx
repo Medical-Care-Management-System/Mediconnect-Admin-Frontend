@@ -31,7 +31,7 @@ const initialHospitals = [
 const HomePage = () => {
   const [doctorSearchTerm, setDoctorSearchTerm] = useState('');
   const [hospitalSearchTerm, setHospitalSearchTerm] = useState('');
-  const [doctors, setDoctors] = useState(initialDoctors);
+  const doctors = initialDoctors
   const [hospitals] = useState(initialHospitals);
 
 

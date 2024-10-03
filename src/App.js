@@ -1,22 +1,22 @@
 import React from 'react';
-// import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Mainview from './Mainview';
-// import Login from './Login';
-// import Main from './Main';
-// import { SignIn } from '@clerk/clerk-react';
+import Login from './Login';
 
 function App() {
   return (
-    // <Router>
-    //   <Routes>
-    //     <Route path="login" element={<SignIn/>} />
-    //     {/* <Route path="/main" element={<Main />} />
-    //     <Route path="*" element={<Navigate to="/" />} /> */}
-    //   </Routes>
-    // </Router>
-    <div>
-      <Mainview/>
-    </div>
+    <Router>
+      <Routes>
+        {/* Route for the Login page */}
+        <Route path="/" element={<Login />} />
+
+        {/* Route for Mainview (after login) */}
+        <Route path="/main" element={<Mainview />} />
+
+        {/* Redirect any unknown path to the login page */}
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
   );
 }
 
