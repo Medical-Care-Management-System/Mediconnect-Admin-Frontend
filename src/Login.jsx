@@ -2,19 +2,19 @@ import React, { useState, useRef } from 'react';
 import { TextField, Button, Container, Box, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); // State for error message
+  const [error, setError] = useState('');
   
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
 
   const handleLogin = () => {
-    setError(''); // Reset error message
+    setError(''); 
 
     if (!email) {
       emailRef.current.focus();
@@ -27,13 +27,18 @@ const Login = () => {
 
     console.log('Email:', email, 'Password:', password);
 
-    // Check for valid email and password
     if (email === "example@gmail.com" && password === "12345678") {
       navigate('/main');
     } else {
-      // Set error message if email or password is incorrect
+
       setError('Email or Password is incorrect');
     }
+  };
+
+  const handleForgot=()=>{
+    console.log("Forgot button clicked");
+    navigate('/forgot');
+
   };
 
   return (
@@ -99,6 +104,7 @@ const Login = () => {
         >
           Login
         </Button>
+        <Button variant="text" onClick={handleForgot}>Forgot password</Button>
         {error && (
           <Typography
             variant="body2"
