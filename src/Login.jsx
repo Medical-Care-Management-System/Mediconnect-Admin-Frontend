@@ -26,19 +26,23 @@ const Login = () => {
     }
 
     console.log('Email:', email, 'Password:', password);
-
-    if (email === "example@gmail.com" && password === "12345678") {
+    if (email === "robert21@gmail.com" && password === "eXample&35") {
+      localStorage.setItem('isLoggedIn', 'true'); // Store login status
       navigate('/main');
     } else {
-
       setError('Email or Password is incorrect');
     }
   };
 
-  const handleForgot=()=>{
+  React.useEffect(() => {
+    if (localStorage.getItem('isLoggedIn')) {
+      navigate('/main'); 
+    }
+  }, [navigate]);
+
+  const handleForgot = () => {
     console.log("Forgot button clicked");
     navigate('/forgot');
-
   };
 
   return (
@@ -85,16 +89,19 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <TextField
           inputRef={passwordRef}
           label="Password"
           type="password"
           variant="outlined"
           fullWidth
+          height
           margin="normal"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
         <Button
           variant="contained"
           color="primary"
@@ -105,6 +112,7 @@ const Login = () => {
           Login
         </Button>
         <Button variant="text" onClick={handleForgot}>Forgot password</Button>
+        
         {error && (
           <Typography
             variant="body2"

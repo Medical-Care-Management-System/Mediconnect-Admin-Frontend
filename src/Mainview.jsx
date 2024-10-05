@@ -12,9 +12,9 @@ function Mainview() {
 
   // Sample data
   const [doctorData, setDoctorData] = useState([
-    { name: "John Smith", doctor_id: 12345 },
-    { name: "Emily Clark", doctor_id: 12344 },
-    { name: "William Johnson", doctor_id: 12343 },
+    { name: "Thomas Jones", doctor_id: 341672299000014,registered_date:"15/9/2010" },
+    { name: "Emily Clark", doctor_id: 1234345767457454,registered_date:"1/6/2020" },
+    { name: "William Johnson", doctor_id: 1598758752343,registered_date:"24/12/2018" },
   ]);
 
   // Function to remove the first doctor and update the doctorData state
@@ -27,6 +27,8 @@ function Mainview() {
 
   // Get the first doctor's ID
   const firstDoctorId = doctorData.length > 0 ? doctorData[0].doctor_id : null;
+  const firstDoctor_name = doctorData.length > 0 ? doctorData[0].name : null;
+  const firstDoctor_regdate = doctorData.length > 0 ? doctorData[0].registered_date : null;
 
   return (
     <div className="flex min-h-screen"> {/* Ensure the main container takes the full viewport height */}
@@ -46,7 +48,7 @@ function Mainview() {
               </div>
               <div className='px-1'></div>
               <div className='border border-gray-600 flex-1'>
-                <AuthorizedDoctor doctorId={firstDoctorId} onDoctorAction={removeFirstDoctor} />
+                <AuthorizedDoctor doctorId={firstDoctorId} doctor_name={firstDoctor_name} doctor_reg_date={firstDoctor_regdate} onDoctorAction={removeFirstDoctor} />
               </div>
             </div>
           )}

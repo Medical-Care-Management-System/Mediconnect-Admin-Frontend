@@ -27,7 +27,7 @@ const BarChart = ({xAxis,yAxis,xPara}) => {
     datasets: [
       {
         label: '',
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: [65, 59, 80, 81, 56],
         backgroundColor: [
           '#71797E'
         ],

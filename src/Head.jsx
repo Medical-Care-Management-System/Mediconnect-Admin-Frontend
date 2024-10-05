@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 const Head = () => {
   const navigate = useNavigate();
   
-      const handleLogout = () => {
-        navigate('/login');
-        console.log("User logged out");
-        // Add your logout logic here
-      };
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn'); // Clear login status
+    navigate('/login');
+    console.log("User logged out");
+  };
+  
 
   return (
     <div className="flex justify-between items-center border border-white p-4">

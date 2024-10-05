@@ -5,14 +5,20 @@ import Login from './Login';
 import ForgotPass from './ForgotPass';
 
 function App() {
+
+  // Protect the main view by checking the login status
+  const ProtectedRoute = ({ element }) => {
+    return localStorage.getItem('isLoggedIn') ? element : <Navigate to="/" />;
+  };
+
   return (
     <Router>
       <Routes>
         {/* Route for the Login page */}
         <Route path="/" element={<Login />} />
 
-        {/* Route for Mainview (after login) */}
-        <Route path="/main" element={<Mainview />} />
+        {/* Protect MainView by checking if the user is logged in */}
+        <Route path="/main" element={<ProtectedRoute element={<Mainview />} />} />
         <Route path="/forgot" element={<ForgotPass />} />
 
         {/* Redirect any unknown path to the login page */}

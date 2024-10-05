@@ -22,6 +22,9 @@ const Filter = () => {
   const [Medicine,setMedicine]=useState([{id : 1, value : ''}]);
   const [Gender,setGender]=useState([{id : 1, value : ''}]);
 
+
+  
+
   const handleToggle = (isChecked, setIsChecked) => {
     if (isChecked) {
       setIsChecked(false);
@@ -382,7 +385,7 @@ const Filter = () => {
           <div className='pr-6 pt-2' key={District.id}> {/* Move key here */}
             <input
               type="text"
-              className='border border-black text-black  w-32 h-7 text-center placeholder-black  '
+              className='border border-black text-black  w-32 h-7 text-center  '
               value={District.value}
               onChange={(e) => handleDistrictChange(District.id, e)}
               disabled={!isCheckedDistrict}
@@ -559,13 +562,7 @@ const Filter = () => {
           onChange={handleYAxisChange}
           disabled={!xAxis} // Disable if no X-axis is selected
         >
-          {/* <option value="" disabled>Y-axis</option>
-          {getYAxisOptions().map((option, index) => (
-            <option key={index} value={option}>
-              {hashmap[option]}
-
-            </option>
-          ))} */}
+    
 
             <option value="" disabled>Y-axis</option>
             {getYAxisOptions().map((option, index) => (
