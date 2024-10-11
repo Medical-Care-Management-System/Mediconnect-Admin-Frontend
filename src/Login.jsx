@@ -40,10 +40,7 @@ const Login = () => {
     }
   }, [navigate]);
 
-  const handleForgot = () => {
-    console.log("Forgot button clicked");
-    navigate('/forgot');
-  };
+
 
   return (
     <Container
@@ -111,7 +108,7 @@ const Login = () => {
         >
           Login
         </Button>
-        <Button variant="text" onClick={handleForgot}>Forgot password</Button>
+
         
         {error && (
           <Typography

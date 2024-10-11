@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Mainview from './Mainview';
 import Login from './Login';
-import ForgotPass from './ForgotPass';
+
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
 
         {/* Protect MainView by checking if the user is logged in */}
         <Route path="/main" element={<ProtectedRoute element={<Mainview />} />} />
-        <Route path="/forgot" element={<ForgotPass />} />
+
 
         {/* Redirect any unknown path to the login page */}
         <Route path="*" element={<Navigate to="/" />} />
