@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Head from './Head';
-import SideBar from './SideBar';
-import DoctorContainer from './DoctorContainer';
-import AuthorizedDoctor from './AuthorizedDoctor';
-import Filter from './Filter';
-import HomePage from './HomePage';
-import ManageAccount from './ManageAccount';
+import SideBar from '../SideBar';
+import DoctorContainer from './Sidebar Component/DoctorAccountApplication/DoctorContainer';
+import AuthorizedDoctor from './Sidebar Component/DoctorAccountApplication/AuthorizedDoctor';
+import Filter from './Sidebar Component/Generate Report/Filter';
+import HomePage from '../HomePage';
+import ManageAccount from './Sidebar Component/ManageAccount';
 
 function Mainview() {
   const [activeMenuItem, setActiveMenuItem] = useState('Home'); // default active

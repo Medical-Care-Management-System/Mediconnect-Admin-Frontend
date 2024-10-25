@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Mainview from './Mainview';
-import Login from './Login';
+import Mainview from './Dashboard/Mainview';
+import Login from './AdminAuthentication/Login';
 
 
 function App() {

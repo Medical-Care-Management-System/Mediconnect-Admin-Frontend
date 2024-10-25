@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AddIcon } from './Icons/icon';
+import { AddIcon } from '../../../Icons/icon';
 import BarChart from './Barchart';
 
 

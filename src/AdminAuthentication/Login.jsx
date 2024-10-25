@@ -3,18 +3,19 @@ import { TextField, Button, Container, Box, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom'; 
+import axios from 'axios';  // Import axios for API calls
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  
+
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate(); 
 
-  const handleLogin = () => {
-    setError(''); 
+  const handleLogin = async () => {
+    setError('');
 
     if (!email) {
       emailRef.current.focus();
@@ -25,12 +26,21 @@ const Login = () => {
       return;
     }
 
-    console.log('Email:', email, 'Password:', password);
-    if (email === "robert21@gmail.com" && password === "eXample&35") {
-      localStorage.setItem('isLoggedIn', 'true'); // Store login status
-      navigate('/main');
-    } else {
-      setError('Email or Password is incorrect');
+    try {
+      
+      const response = await axios.post('http://localhost:8000/verify/', {
+        email: email,   
+        password: password,
+      });
+
+      if (response.data.status === 'success') {
+        localStorage.setItem('isLoggedIn', 'true'); 
+        navigate('/main'); 
+      } else {
+        setError('Email or Password is incorrect');
+      }
+    } catch (error) {
+      setError('Error logging in. Please try again.');
     }
   };
 
@@ -39,8 +49,6 @@ const Login = () => {
       navigate('/main'); 
     }
   }, [navigate]);
-
-
 
   return (
     <Container
@@ -93,7 +101,6 @@ const Login = () => {
           type="password"
           variant="outlined"
           fullWidth
-          height
           margin="normal"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -109,7 +116,6 @@ const Login = () => {
           Login
         </Button>
 
-        
         {error && (
           <Typography
             variant="body2"
