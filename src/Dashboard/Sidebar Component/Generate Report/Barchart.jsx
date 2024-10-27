@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { DownloadIcon } from './Icons/icon';
+import { DownloadIcon } from '../../../Icons/icon';
 import {
   Chart as ChartJS,
   CategoryScale,
