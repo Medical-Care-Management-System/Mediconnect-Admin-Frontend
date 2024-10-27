@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { DownloadIcon } from '../../../Icons/icon';
+import PropTypes from 'prop-types';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,13 +18,13 @@ import * as XLSX from 'xlsx';
 // Register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const BarChart = ({xAxis,yAxis,xPara}) => {
+const BarChart = ({xAxis,yAxis,xParam}) => {
   const chartRef = useRef(null); // Create a reference to the chart
   const [showDownloadOptions, setShowDownloadOptions] = useState(false); // Control modal visibility
 
   // Dummy data for the chart
   const data = {
-    labels: xPara,
+    labels: xParam,
     datasets: [
       {
         label: '',
@@ -196,5 +197,12 @@ const BarChart = ({xAxis,yAxis,xPara}) => {
     </div>
   );
 };
+BarChart.propTypes={
+  xAxis: PropTypes.string.isRequired,
+  yAxis: PropTypes.string.isRequired,
+  xParam:PropTypes.string
+}
+
+
 
 export default BarChart;

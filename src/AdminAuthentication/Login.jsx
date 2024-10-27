@@ -3,7 +3,7 @@ import { TextField, Button, Container, Box, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';  // Import axios for API calls
+import { post } from '../request';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -28,10 +28,7 @@ const Login = () => {
 
     try {
       
-      const response = await axios.post('http://localhost:8000/verify/', {
-        email: email,   
-        password: password,
-      });
+      const response = post('/verify',{email:email,password:password})
 
       if (response.data.status === 'success') {
       localStorage.setItem('isLoggedIn', 'true');
