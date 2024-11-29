@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './style/ManageAccount.css';
+import '../../style/ManageAccount.css';
 
 const ManageAccount = () => {
   const [selectedOption, setSelectedOption] = useState('NIC');

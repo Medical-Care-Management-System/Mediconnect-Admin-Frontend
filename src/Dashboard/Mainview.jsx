@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Head from './Head';
-import SideBar from '../SideBar';
+import SideBar from './SideBar';
 import DoctorContainer from './Sidebar Component/DoctorAccountApplication/DoctorContainer';
 import AuthorizedDoctor from './Sidebar Component/DoctorAccountApplication/AuthorizedDoctor';
 import Filter from './Sidebar Component/Generate Report/Filter';
-import HomePage from '../HomePage';
+import HomePage from './Sidebar Component/HomePage';
 import ManageAccount from './Sidebar Component/ManageAccount';
 
 function Mainview() {

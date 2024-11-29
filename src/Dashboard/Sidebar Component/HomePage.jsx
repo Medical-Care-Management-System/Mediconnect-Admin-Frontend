@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-import {  DoctorIcon,Patient } from './Icons/icon.js';
+import {  DoctorIcon,Patient } from '../../Icons/icon.js';
 
 // Sample doctor and hospital data
 const initialDoctors = [

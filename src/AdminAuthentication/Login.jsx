@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import { TextField, Button, Container, Box, Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { useNavigate } from 'react-router-dom'; 
-import axios from 'axios';  // Import axios for API calls
+import { useNavigate } from 'react-router-dom';
+import { post } from '../request';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ const Login = () => {
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     setError('');
@@ -28,17 +28,14 @@ const Login = () => {
 
     try {
       
-      const response = await axios.post('http://localhost:8000/verify/', {
-        email: email,   
-        password: password,
-      });
+      const response = post('/verify',{email:email,password:password})
 
       if (response.data.status === 'success') {
-        localStorage.setItem('isLoggedIn', 'true'); 
-        navigate('/main'); 
-      } else {
-        setError('Email or Password is incorrect');
-      }
+      localStorage.setItem('isLoggedIn', 'true');
+      navigate('/main');
+    } else {
+      setError('Email or Password is incorrect');
+    }
     } catch (error) {
       setError('Error logging in. Please try again.');
     }
@@ -46,7 +43,7 @@ const Login = () => {
 
   React.useEffect(() => {
     if (localStorage.getItem('isLoggedIn')) {
-      navigate('/main'); 
+      navigate('/main');
     }
   }, [navigate]);
 
